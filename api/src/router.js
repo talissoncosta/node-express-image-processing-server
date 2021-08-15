@@ -4,6 +4,7 @@ const path = require("path");
 const imageProcessor = require("./imageProcessor");
 
 const router = Router();
+const photoPath = path.resolve(__dirname, "../../client/photo-viewer.html");
 
 const filename = (request, file, callback) => {
   callback(null, file.originalname);
@@ -35,4 +36,7 @@ router.post("/upload", upload.single("photo"), (request, response) => {
   return response.status(201).json({ success: true });
 });
 
+router.get("/photo-viewer", (request, response) => {
+  response.sendFile(photoPath);
+});
 module.exports = router;
